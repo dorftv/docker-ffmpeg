@@ -7,8 +7,7 @@ ffmpeg is built with support for:
 --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 
 --enable-nonfree --enable-libx265 ```
 
-the container is built using ansible and the 
-[dorftv.fmpeg](https://github.com/dorftv/ansible-role-ffmpeg.git)  ansible role.
+the container is built using ansible and the [dorftv.fmpeg](https://github.com/dorftv/ansible-role-ffmpeg.git)  ansible role.
 
 The image is built on the automated automated docker hub and comes in different
 flavors:
@@ -16,8 +15,7 @@ flavors:
 [dorftv/ffmpeg](https://hub.docker.com/r/dorftv/ffmpeg/) exposes ffmpeg 
 [dorftv/ffprobe](https://hub.docker.com/r/dorftv/ffprobe/) exposes ffprobe
 TODO: [dorftv/ffserver](https://hub.docker.com/r/dorftv/ffprobe/) exposes ffserver 
-[dorftv/ffmpeg-core](https://registry.hub.docker.com/u/dorftv/ffmpeg-core) for the configuration 
-and 
+[dorftv/ffmpeg-core](https://registry.hub.docker.com/u/dorftv/ffmpeg-core) for the configuration and 
 compilation part. Not intended for endusers.
 
 #Examples for dorftv/ffmpeg
