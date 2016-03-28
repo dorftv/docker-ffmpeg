@@ -7,12 +7,13 @@ Full featured ffmpeg image with all needed libraries for webvideo and decklink c
     --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 
     --enable-nonfree --enable-libx265
 
-the container is built using ansible and the [dorftv.fmpeg](https://github.com/dorftv/ansible-role-ffmpeg.git)  ansible role. If you want to compile on bare metal 
+the container is built using ansible and the [dorftv.ffmpeg](https://galaxy.ansible.com/dorftv/ffmpeg/)  ansible role. If you want to compile on bare metal or add features this is a good starting point.  
+FFmpeg 
 
-The image is built on the automated automated docker hub and comes in different flavors:
+The images are built on the automated docker hub and comes in different flavors:
 [dorftv/ffmpeg](https://hub.docker.com/r/dorftv/ffmpeg/) exposes ffmpeg 
 [dorftv/ffprobe](https://hub.docker.com/r/dorftv/ffprobe/) exposes ffprobe
-TODO: [dorftv/ffserver](https://hub.docker.com/r/dorftv/ffprobe/) exposes ffserver 
+TODO: [dorftv/ffserver](https://hub.docker.com/r/dorftv/ffserver/) exposes ffserver 
 [dorftv/ffmpeg-core](https://registry.hub.docker.com/u/dorftv/ffmpeg-core) for the configuration and compilation part.
 
 #Examples for dorftv/ffmpeg
@@ -31,12 +32,10 @@ ffmpeg -i /srv/assets/input.avi -vcodec libx264 -preset slow -crf 20 -acodec lib
 
 ##dorftv/ffmpeg for decklink capturing
 FFmpeg supports capturing of Blackmagic devices ( Decklink SDI, and Intensity Pro). You can consult 
-the [FFmpeg Help Page](https://www.ffmpeg.org/ffmpeg-devices.html#decklink) for detailed Information how to use the Decklink consumer.
+the [FFmpeg Help Page](https://www.ffmpeg.org/ffmpeg-devices.html#decklink) for detailed Information on how to use the Decklink consumer.
 For ffmpeg to find your capture device you need to install the [Blackmagic Desktopvideo driver ](https://www.blackmagicdesign.com/at/support/family/capture-and-playback)
-package on your host system and add **--device /dev/blackmagic/dv0** to docker. You also need to mount 
-**/usr/lib/libDeckLinkAPI.so** into the container.
-If you want to write files make sure you mount your data directory. You don't need that if you 
-intend to feed a streaming server.
+package on your host system and add **--device /dev/blackmagic/dv0** to docker. You also need to mount **/usr/lib/libDeckLinkAPI.so** into the container.
+If you want to write files make sure you mount your data directory. You don't need that if you intend to feed a streaming server.
 
 ``` 
 alias ffmpeg="docker run -it --rm --device /dev/blackmagic/dv0 -v \
