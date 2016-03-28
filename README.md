@@ -1,4 +1,5 @@
-#ffmpeg docker image
+ffmpeg docker image
+###################
 
 Full featured ffmpeg image with all needed libraries for webvideo and decklink capturing.
 
@@ -13,12 +14,15 @@ FFmpeg
 The images are built on the automated docker hub and comes in different flavors:
 [dorftv/ffmpeg](https://hub.docker.com/r/dorftv/ffmpeg/) exposes ffmpeg 
 [dorftv/ffprobe](https://hub.docker.com/r/dorftv/ffprobe/) exposes ffprobe
-TODO: [dorftv/ffserver](https://hub.docker.com/r/dorftv/ffserver/) exposes ffserver 
+[dorftv/ffserver](https://hub.docker.com/r/dorftv/ffserver/) exposes ffserver (TODO)
 [dorftv/ffmpeg-core](https://registry.hub.docker.com/u/dorftv/ffmpeg-core) for the configuration and compilation part.
 
-#Examples for dorftv/ffmpeg
+Examples for dorftv/ffmpeg
+##########################
 
-##dorftv/ffmpeg for transcoding files
+dorftv/ffmpeg for transcoding files
+-----------------------------------
+
 you need to make sure that the directory holding your videos is available in the container. Use the
 -v option in docker to mount your directory. 
 
@@ -30,7 +34,9 @@ ffmpeg -i /srv/assets/input.avi -vcodec libx264 -preset slow -crf 20 -acodec lib
 ```
 
 
-##dorftv/ffmpeg for decklink capturing
+dorftv/ffmpeg for decklink capturing
+------------------------------------
+
 FFmpeg supports capturing of Blackmagic devices ( Decklink SDI, and Intensity Pro). You can consult 
 the [FFmpeg Help Page](https://www.ffmpeg.org/ffmpeg-devices.html#decklink) for detailed Information on how to use the Decklink consumer.
 For ffmpeg to find your capture device you need to install the [Blackmagic Desktopvideo driver ](https://www.blackmagicdesign.com/at/support/family/capture-and-playback)
@@ -39,7 +45,8 @@ If you want to write files make sure you mount your data directory. You don't ne
 
 ``` 
 alias ffmpeg="docker run -it --rm --device /dev/blackmagic/dv0 -v \
-/usr/lib/libDeckLinkAPI.so:/usr/lib/libDeckLinkAPI.so dorftv/ffmpeg"  
+/usr/lib/libDeckLinkAPI.so:/usr/lib/libDeckLinkAPI.so \
+-v /srv/assets:/srv/assets dorftv/ffmpeg"  
 
 # Get a list of devices.
 ffmpeg -f decklink -list_devices 1 -i dummy
