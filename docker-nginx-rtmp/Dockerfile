@@ -10,7 +10,20 @@ RUN apt-get update && apt-get install -y libpcre3-dev zlib1g-dev libssl-dev unzi
     mkdir /src && mkdir /config && mkdir /logs && mkdir /data && mkdir /static && cd /src && \
     wget http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz && tar -xzvf nginx-$NGINX_VERSION.tar.gz && \
     git clone https://github.com/sergey-dryabzhinsky/nginx-rtmp-module.git 
-RUN cd /src/nginx-$NGINX_VERSION && ./configure --add-module=/src/nginx-rtmp-module -with-http_ssl_module --conf-path=/config/nginx.conf --error-log-path=/logs/error.log --http-log-path=/logs/access.log && \
+RUN cd /src/nginx-$NGINX_VERSION && ./configure \
+                        --with-http_addition_module \
+                        --with-http_gunzip_module \
+                        --with-http_gzip_static_module \
+                        --with-http_sub_module \
+                        --with-stream \
+                        --with-stream_ssl_module \
+                        --with-mail \
+                        --with-mail_ssl_module \
+                        --with-threads \
+                        --with-pcre-jit \
+                        --with-http_ssl_module \
+			--with-ipv6 \
+                        --add-module=/src/nginx-rtmp-module --conf-path=/config/nginx.conf --error-log-path=/logs/error.log --http-log-path=/logs/access.log && \
     make -j5 && make install && rm -rf /src && apt-get clean && apt-get autoremove
 
 ADD static /static
