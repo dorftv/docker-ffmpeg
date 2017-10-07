@@ -1,4 +1,4 @@
-FROM ubuntu:12.04
+FROM dorftv/ffmpeg-core
 
 RUN cd /tmp && \
     apt-get update && apt-get install -y wget && \
@@ -8,4 +8,3 @@ RUN cd /tmp && \
 WORKDIR /opt/codem-scheduler
 
 cmd    ["/opt/codem-scheduler/run.sh"]
-
